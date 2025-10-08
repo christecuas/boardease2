@@ -4,10 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -28,7 +31,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     EditText etFirstName, etLastName, etMiddleName, etBirthDate, etPhone, etAddress, etEmail, etPassword, etGcashNum;
     TextView tvLogin;
-    ImageView UploadQr, ivTogglePassword;
+    ImageView UploadQr;
+    ImageButton btnTogglePassword;
     Button btnNext;
     boolean isPasswordVisible = false;
 
@@ -66,6 +70,7 @@ public class RegistrationActivity extends AppCompatActivity {
         etGcashNum = findViewById(R.id.etGcashNum);
 
         tvLogin = findViewById(R.id.tvLogin);
+        btnTogglePassword = findViewById(R.id.btnTogglePassword);
 
         UploadQr = findViewById(R.id.UploadQr);
 
@@ -123,6 +128,11 @@ public class RegistrationActivity extends AppCompatActivity {
             pickImageLauncher.launch("image/*"); // open only image files
         });
 
+        // Password toggle button click listener
+        btnTogglePassword.setOnClickListener(v -> {
+            togglePasswordVisibility();
+        });
+
         //Button next for proceeding to the next Activity
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,5 +180,21 @@ public class RegistrationActivity extends AppCompatActivity {
                 startActivity(a);
             }
         });
+    }
+
+    private void togglePasswordVisibility() {
+        if (isPasswordVisible) {
+            // Hide password
+            etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            btnTogglePassword.setImageResource(R.drawable.ic_password_hidden);
+            isPasswordVisible = false;
+        } else {
+            // Show password
+            etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            btnTogglePassword.setImageResource(R.drawable.ic_password_visible);
+            isPasswordVisible = true;
+        }
+        // Move cursor to end of text
+        etPassword.setSelection(etPassword.getText().length());
     }
 }
