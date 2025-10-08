@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")
+    // id("com.google.gms.google-services") // Temporarily disabled - no google-services.json file
 }
 
 android {
@@ -50,7 +50,8 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
 
-    implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-messaging")
+    // Firebase dependencies temporarily disabled - no google-services.json file
+    // implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
+    // implementation("com.google.firebase:firebase-analytics")
+    // implementation("com.google.firebase:firebase-messaging")
 }
