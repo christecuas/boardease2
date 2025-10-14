@@ -23,7 +23,7 @@ public class PaymentApiService {
     }
 
     public interface PaymentListCallback {
-        void onSuccess(List<PaymentModel> payments);
+        void onSuccess(List<PaymentData> payments);
         void onError(String error);
     }
 
@@ -33,15 +33,11 @@ public class PaymentApiService {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        List<PaymentModel> payments = new ArrayList<>();
+                        List<PaymentData> payments = new ArrayList<>();
                         JSONArray paymentsArray = response.getJSONArray("payments");
                         for (int i = 0; i < paymentsArray.length(); i++) {
                             JSONObject paymentObj = paymentsArray.getJSONObject(i);
-                            PaymentModel payment = new PaymentModel();
-                            payment.setId(paymentObj.getInt("id"));
-                            payment.setAmount(paymentObj.getDouble("amount"));
-                            payment.setStatus(paymentObj.getString("status"));
-                            payment.setDate(paymentObj.getString("date"));
+                            PaymentData payment = PaymentData.fromJson(paymentObj);
                             payments.add(payment);
                         }
                         callback.onSuccess(payments);
@@ -60,15 +56,11 @@ public class PaymentApiService {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        List<PaymentModel> payments = new ArrayList<>();
+                        List<PaymentData> payments = new ArrayList<>();
                         JSONArray paymentsArray = response.getJSONArray("payments");
                         for (int i = 0; i < paymentsArray.length(); i++) {
                             JSONObject paymentObj = paymentsArray.getJSONObject(i);
-                            PaymentModel payment = new PaymentModel();
-                            payment.setId(paymentObj.getInt("id"));
-                            payment.setAmount(paymentObj.getDouble("amount"));
-                            payment.setStatus(paymentObj.getString("status"));
-                            payment.setDate(paymentObj.getString("date"));
+                            PaymentData payment = PaymentData.fromJson(paymentObj);
                             payments.add(payment);
                         }
                         callback.onSuccess(payments);
@@ -87,15 +79,11 @@ public class PaymentApiService {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
-                        List<PaymentModel> payments = new ArrayList<>();
+                        List<PaymentData> payments = new ArrayList<>();
                         JSONArray paymentsArray = response.getJSONArray("payments");
                         for (int i = 0; i < paymentsArray.length(); i++) {
                             JSONObject paymentObj = paymentsArray.getJSONObject(i);
-                            PaymentModel payment = new PaymentModel();
-                            payment.setId(paymentObj.getInt("id"));
-                            payment.setAmount(paymentObj.getDouble("amount"));
-                            payment.setStatus(paymentObj.getString("status"));
-                            payment.setDate(paymentObj.getString("date"));
+                            PaymentData payment = PaymentData.fromJson(paymentObj);
                             payments.add(payment);
                         }
                         callback.onSuccess(payments);
